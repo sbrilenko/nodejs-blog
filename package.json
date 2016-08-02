@@ -1,0 +1,21 @@
+{
+  "name": "codeit",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "NODE_PATH=./ node ./bin/www",
+    "build": "npm i && cp config/default.sample.json config/default.json"
+  },
+  "dependencies": {
+    "body-parser": "~1.15.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "ejs": "~2.4.1",
+    "express": "~4.13.4",
+    "express-form2": "^1.5.0",
+    "mongoose": "^4.5.8",
+    "mongoose-unique-validator": "^1.0.2",
+    "morgan": "~1.7.0",
+    "serve-favicon": "~2.3.0"
+  }
+}

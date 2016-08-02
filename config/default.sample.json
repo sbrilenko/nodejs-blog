@@ -1,0 +1,17 @@
+{
+	"application": {
+		"name": "codeit-test-task",
+		"title": "CodeIT test task",
+		"x-powered-by": "CodeIT NodeJS Devs"
+	},
+	"mongoose": {
+		"uri": "mongodb://localhost/task",
+		"options": {
+			"server": {
+				"socketOptions": {
+					"keepAlive": 1
+				}
+			}
+		}
+	}
+}
