@@ -1,10 +1,10 @@
 'use strict';
 const router = require('express').Router();
 
-const HttpError = require("helpers/HttpError");
-const Session = require("helpers/Session");
-const ACL = require('helpers/ACL');
-const Users = require("models/Users");
+const HttpError = require("../helpers/HttpError");
+const Session = require("../helpers/Session");
+const ACL = require('../helpers/ACL');
+const Users = require("../models/Users");
 const form = require('express-form2');
   var field   = form.field;
 
@@ -12,6 +12,7 @@ router.post(
     ['/signin'],
 
     // Body validation
+
     form(
         field('email')
             .required()
@@ -64,16 +65,14 @@ router.post(
         if (!req.form.isValid) {
             return next(new HttpError(412, "Invalid input data", req.form.errors));
         }
-
         Users
             .findOne({
                 email: req.form.email,
             })
             .then((user) => {
                 if (user) {
-                    throw new HttpError(409);
+                    return next(new HttpError(409, "Email already used", req.form.errors));
                 }
-
                 return null;
             })
             .then(() => {
@@ -87,7 +86,9 @@ router.post(
             .then(() => {
                 res.send();
             })
-            .catch(next);
+            .catch(function(e){
+                console.log("catch ",e)
+            });
     }
 );
 

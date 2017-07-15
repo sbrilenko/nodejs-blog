@@ -1,8 +1,8 @@
 'use strict';
 const router = require('express').Router();
 
-const HttpError = require("helpers/HttpError");
-const Session = require("helpers/Session");
+const HttpError = require("../helpers/HttpError");
+const Session = require("../helpers/Session");
 
 router.use((req, res, next) => {
     res.header('Content-Type', 'application/json');

@@ -1,0 +1,9 @@
+<header ng-init="init()" ng-controller="HeaderController" >
+    <div class="logo"><a href="/">Logo</a></div>
+    <div class="auth-block">
+        <a href="#!/auth" ng-if="!User.isAuthorizated()">Auth</a>
+        <span ng-if="User.isAuthorizated()">{{User.getEmail()}}</span><button class="logout-button" ng-if="User.isAuthorizated()" ng-click="User.logout()">Logout</button>
+    </div>
+    <div class="underline"></div>
+
+</header>

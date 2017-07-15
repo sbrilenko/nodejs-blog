@@ -1,0 +1,34 @@
+<div ng-if="User.isAuthorizated()" class="create-article-button-block">
+    <button ng-click="articleCreate()" ng-disabled="article_in_progress">Create article</button>
+</div>
+<form class="search-form">
+    <input ng-model="articleSearchTerm" placeholder="Search by title and text" ng-readonly="search_in_progress" ng-change="articleSearch()">
+</form>
+<div class="sort-block">
+    <label class="sort-label">Sort by: </label>
+    <span ng-class="{'now-active': sortNewOnTop === activeSort}" ng-click="sortArticle(sortNewOnTop)">{{sortNewOnTop}}</span> <span ng-class="{'now-active':sortOldOnTop === activeSort}" ng-click="sortArticle(sortOldOnTop)">{{sortOldOnTop}}</span>
+</div>
+<ul id="search-articles">
+    <li ng-repeat="article in searchArticleArray" ng-if="articleSearchTerm!=''">
+        <h3><a ng-href="#!blog/{{article.id}}">Title: {{article.title}}</a></h3>
+        <div>Text: {{article.text}}</div>
+        <div>Created at: {{article.created | amDateFormat:'MM-DD-YYYY HH:mm:ss'}}</div>
+        <button ng-if="User.isAuthorizated()" ng-click="removeArticle(article.id)" ng-disabled="article_in_progress">remove article</button>
+    </li>
+</ul>
+<ul id="all-blogs-articles" ng-if="articleSearchTerm==''">
+    <li ng-repeat="article in BlogService.blogsArray" ng-class="{'to-remove' : HelperService.postIdToRemove===article.id}">
+        <h3><a ng-href="#!blog/{{article.id}}">Title: {{article.title}}</a></h3>
+        <div>Text: {{article.text}}</div>
+        <div>Created at: {{article.created | amDateFormat:'MM-DD-YYYY HH:mm:ss'}}</div>
+        <remove-post ng-if="User.isAuthorizated()" path="main" post-id="{{article.id}}" ng-disabled="article_in_progress"></remove-post>
+    </li>
+</ul>
+
+<div ng-if="BlogService.blogsArray.length==0" class="articlesAreEmpty">
+    There is no articles
+    <br />
+    <div ng-if="!User.isAuthorizated()">If you want create new article, please SignIn or SignUp</div>
+    <br />
+</div>
+<article-dialog ng-show="showArticleDialog"></article-dialog>

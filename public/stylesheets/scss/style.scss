@@ -1,0 +1,110 @@
+$fhheight: 50px;
+$sitepadding: 10px $fhheight;
+$border: 2px solid black;
+$clearboth: both;
+$contentheight: 500px;
+$authcolumnwidth: 45%;
+body {
+  margin: 0;
+}
+
+a {
+  color: #00B7FF;
+}
+
+header, footer {
+  height: $fhheight;
+  padding: $sitepadding
+}
+header{
+  .logo {
+    font-size: 30px;
+    float: left;
+  }
+  .auth-block {
+    float: right;
+  }
+  .underline {
+    border: $border;
+    clear: $clearboth;
+  }
+  .logout-button{
+    margin-left: 20px;
+  }
+}
+footer{
+  .underline {
+    border: $border;
+    clear: $clearboth;
+  }
+  .copy {
+    text-align: right;
+    padding: 10px;
+  }
+}
+.not-found-page{
+  text-align: center;
+  padding: 20px;
+}
+.content{
+  min-height: $contentheight;
+  .ngview{
+    padding: $sitepadding
+  }
+  #search-articles, .sort-block, .search-form ,#all-blogs-articles, .auth-registration-block, .article-page {
+    margin: 0;
+    padding: $sitepadding;
+  }
+  li{
+    list-style: none;
+  }
+  .articlesAreEmpty{
+    min-height: $contentheight;
+    text-align: center;
+    font-size: 30px;
+  }
+  .signin-block{
+    float:left;
+    width: $authcolumnwidth;
+  }
+  .signup-block{
+    float:right;
+    width: $authcolumnwidth;
+  }
+  .create-article-button-block{
+    text-align: center;
+    width: 100%;
+  }
+  #create-article-dialog{
+    position: fixed;
+    width: $contentheight;
+    height: 200px;
+    left: 50%;
+    top: 10px;
+    margin-left: -250px;
+    z-index: 10000;
+    border: 1px solid black;
+    background-color: white;
+  }
+  .create-article-dialog-overlay{
+    position: fixed;
+    width:100%;
+    height:100%;
+    z-index:9999;
+    top: 0;
+    background-color: rgba(0,0,0,0.4);
+  }
+  .sort-block {
+    label, span {
+      padding-right: 30px;
+    }
+    span.now-active{
+      color: red;
+    }
+  }
+  .to-remove{
+    opacity: 0.75;
+  }
+}
+
+
