@@ -1,0 +1,27 @@
+{
+  "name": "codeit",
+  "authors": [
+    "Sergey Brilenko <brilenkosp@gmail.com>"
+  ],
+  "description": "Test test",
+  "main": "",
+  "license": "Private",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.5",
+    "angular-route": "^1.5.5",
+    "ng-dialog": "^0.6.1",
+    "angular-cookies": "^1.5.5",
+    "restangular": "^1.5.2",
+    "angular-validation-match": "^1.9.0",
+    "moment": "^2.13.0",
+    "angular-moment": "^1.0.1"
+  }
+}

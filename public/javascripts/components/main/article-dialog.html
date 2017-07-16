@@ -1,0 +1,22 @@
+<div>
+    <div class="create-article-dialog-overlay" ng-click="closeDialog()"></div>
+    <div id="create-article-dialog">
+        <h1>Create Article</h1>
+        <form name="form">
+            <div class="article-title-block">
+                <label for="article-title">Title</label>
+                <input id="article-title" ng-readonly="article_in_progress" pattern=".{3,255}" ng-model="article.title" name="articleTitle" required="">
+                <div class="error" ng-if="form.articleTitle.$invalid && !form.articleTitle.$pristine">Enter title of Article</div>
+            </div>
+            <div class="article-text-block">
+                <label for="article-texr">Texr</label>
+                <textarea id="article-texr" ng-readonly="article_in_progress" ng-model="article.text" name="articleText" required=""></textarea>
+                <div class="error" ng-if="form.articleText.$invalid && !form.articleText.$pristine">Enter text of Article</div>
+            </div>
+            <div class="article-submit-block">
+                <button ng-click="createArticle(form)" ng-disabled="article_in_progress" >Create Article</button>
+            </div>
+            <div class="article-form-errors" ng-if="articleErrorsFlag">{{articleErrors}}</div>
+        </form>
+    </div>
+</div>

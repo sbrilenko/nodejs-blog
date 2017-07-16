@@ -1,0 +1,22 @@
+<div class="article-page">
+        <h1>Edit Article</h1>
+        <form name="form">
+            <div class="article-title-block">
+                <label for="article-title">Title</label>
+                <div ng-if="!User.isAuthorizated()">{{article.title}}</div>
+                <input id="article-title" ng-if="User.isAuthorizated()" ng-readonly="article_in_progress" pattern=".{3,255}" ng-model="article.title" name="articleTitle" required="">
+                <div class="error" ng-if="User.isAuthorizated() && form.articleTitle.$invalid && !form.articleTitle.$pristine">Enter title of Article</div>
+            </div>
+            <div class="article-text-block">
+                <label for="article-text">Text</label>
+                <div ng-if="!User.isAuthorizated()">{{article.text}}</div>
+                <textarea id="article-text" ng-if="User.isAuthorizated()" ng-readonly="article_in_progress" ng-model="article.text" name="articleText" required=""></textarea>
+                <div class="error" ng-if="User.isAuthorizated() && form.articleText.$invalid && !form.articleText.$pristine">Enter text of Article</div>
+            </div>
+            <div ng-if="User.isAuthorizated()" class="article-submit-block">
+                <button ng-click="editArticle(form)" ng-disabled="article_in_progress" >Edit Article</button>
+                <remove-post ng-if="User.isAuthorizated()" path="blog" post-id="{{article.id}}" ng-disabled="article_in_progress"></remove-post>
+            </div>
+            <div ng-if="User.isAuthorizated()" class="article-form-errors" ng-if="articleErrorsFlag">{{articleErrors}}</div>
+        </form>
+</div>

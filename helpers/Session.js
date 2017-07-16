@@ -8,8 +8,8 @@
  */
 'use strict';
 
-const Users = require("models/Users");
-const HttpError = require("helpers/HttpError");
+const Users = require("../models/Users");
+const HttpError = require("../helpers/HttpError");
 
 var Session = {
     /**

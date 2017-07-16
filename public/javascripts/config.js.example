@@ -1,0 +1,7 @@
+/**
+ * Created by sbrilenko on 12/07/17.
+ */
+
+testApp.BACKEND_BASE_API_URL = 'http://localhost:3000/api';
+testApp.BACKEND_BASE_URL = 'http://localhost:3000';
+const BASE_TEMPLATE_FOLDER = 'build'; // with no trailing slash at the end

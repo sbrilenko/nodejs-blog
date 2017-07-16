@@ -1,10 +1,10 @@
 'use strict';
 const router = require('express').Router();
 
-const HttpError = require("helpers/HttpError");
-const ACL = require('helpers/ACL');
-const Blogs = require("models/Blogs");
-const ObjectId = require("helpers/ObjectId");
+const HttpError = require("../helpers/HttpError");
+const ACL = require('../helpers/ACL');
+const Blogs = require("../models/Blogs");
+const ObjectId = require("../helpers/ObjectId");
 const form = require('express-form2');
   var field   = form.field;
 

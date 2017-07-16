@@ -1,0 +1,46 @@
+<div class="auth-registration-block">
+    <div class="signin-block">
+        <form name="form" novalidate>
+            <h2>Sign In</h2>
+            <div class="login-email-block">
+                <label for="login-email">Email</label>
+                <input id="login-email" required="" ng-model="login.email" name="loginEmail" type="email" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" ng-readonly="login_in_progress" ng-class="{error: form.email.$invalid && formIsChecked}" >
+                <div ng-show="form.loginEmail.$invalid && !form.loginEmail.$pristine" class="error-message">Please enter a valid email address</div>
+            </div>
+            <div class="login-pass-block">
+                <label for="login-pass">Password</label>
+                <input id="login-pass" required="" ng-model="login.password" name="loginPassword" type="password" placeholder="Password" pattern=".{8,40}" ng-readonly="login_in_progress" ng-class="{error: form.password.$invalid && formIsChecked}">
+                <div ng-show="form.loginPassword.$invalid && !form.loginPassword.$pristine" class="error-message">Please enter correct (min 8 max 40 characters) your password</div>
+            </div>
+            <div class="login-submit-block">
+                <button ng-click="signIn(form)" ng-disabled="login_in_progress">signIn</button>
+            </div>
+            <div id="login-error-from-server" ng-if="loginFlag">{{loginErrors}}</div>
+        </form>
+    </div>
+    <div class="signup-block">
+        <form name="registrationForm">
+            <h2>Sign Up</h2>
+            <div class="registration-email-block">
+                <label for="registration-email">Email</label>
+                <input id="registration-email" required="" ng-model="registration.email" name="registrationEmail" type="email" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" ng-readonly="login_in_progress" ng-class="{error: registrationForm.registrationEmail.$invalid && !registrationForm.registrationEmail.$pristine}" >
+                <div ng-show="registrationForm.registrationEmail.$invalid && !registrationForm.registrationEmail.$pristine" class="error-message">Please enter a valid email address</div>
+            </div>
+            <div class="registration-pass-block">
+                <label for="registration-pass">Password</label>
+                <input id="registration-pass" required="" ng-model="registration.password" name="registrationPassword" type="password" placeholder="Password" pattern=".{8,40}" ng-readonly="login_in_progress" ng-class="{error: registrationForm.registrationPassword.$invalid && !registrationForm.registrationPassword.$pristine}">
+                <div ng-show="registrationForm.password.$invalid && !registrationForm.registrationPassword.$pristine" class="error-message">Please enter your password</div>
+            </div>
+            <div class="registration-pass-block">
+                <label for="registration-confirm-pass">Confirm Password</label>
+                <input id="registration-confirm-pass" required="" ng-model="registration.confirmPassword" name="registrationConfirmPassword" type="password" placeholder="Confirm Password" pattern=".{8,40}" ng-readonly="login_in_progress" ng-class="{error: registrationForm.registrationConfirmPassword.$invalid && formIsChecked}">
+                <div ng-show="registrationForm.registrationConfirmPassword.$invalid && !registrationForm.registrationConfirmPassword.$pristine" match="registration.password" class="error-message">Please confirm password</div>
+                <div ng-show="registrationForm.registrationConfirmPassword.$error.match">Fields do not match!</div>
+            </div>
+            <div class="login-submit-block">
+                <button ng-click="signUp(registrationForm)" ng-disabled="login_in_progress">signUp</button>
+            </div>
+            <div id="registration-error-from-server" ng-if="registrationFlag">{{registrationErrors}}</div>
+        </form>
+    </div>
+</div>

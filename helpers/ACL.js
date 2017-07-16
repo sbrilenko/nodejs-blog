@@ -1,4 +1,4 @@
-var HttpError = require("helpers/HttpError");
+var HttpError = require("../helpers/HttpError");
 
 function ACL() {
     return function(req, res, next) {

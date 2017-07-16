@@ -6,11 +6,11 @@
  */
 'use strict';
 
-const config = require("config/default");
-const mongoose = require("helpers/Mongoose");
+const config = require("../config/default");
+const mongoose = require("../helpers/Mongoose");
 const uniqueValidator = require('mongoose-unique-validator');
 // This made to void extra coding for expressions handling
-const HttpError = require("helpers/HttpError");
+const HttpError = require("../helpers/HttpError");
 
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
