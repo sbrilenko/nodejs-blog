@@ -3,7 +3,7 @@ testApp.controller('BlogController', function($scope, $routeParams, $location, U
 
     $scope.article = {};
     $scope.User = User;
-    $scope.article_in_progress = false;
+    $scope.articleInProgress = false;
     $scope.articleErrorsFlag = false;
     $scope.articleErrors = "";
     $scope.postId = $routeParams.postId;
@@ -15,20 +15,20 @@ testApp.controller('BlogController', function($scope, $routeParams, $location, U
     });
 
     $scope.editArticle = function(form){
-        $scope.article_in_progress = true;
+        $scope.articleInProgress = true;
         if (form.$valid) {
             BlogService.articleEdit($scope.article,function(response){
-                $scope.article_in_progress = false;
+                $scope.articleInProgress = false;
                 $scope.articleErrorsFlag = false;
                 $scope.articleErrors = "";
                 $location.path('/');
             },function(response){
-                $scope.article_in_progress = false;
+                $scope.articleInProgress = false;
                 $scope.articleErrorsFlag = true;
-                $scope.articleErrors = response.data.message;
+                $scope.articleErrors = response;
             })
         }else{
-            $scope.article_in_progress = false;
+            $scope.articleInProgress = false;
             $scope.articleErrorsFlag = true;
             $scope.articleErrors = "Form not valid";
         }

@@ -1,27 +1,19 @@
 <div ng-if="User.isAuthorizated()" class="create-article-button-block">
-    <button ng-click="articleCreate()" ng-disabled="article_in_progress">Create article</button>
+    <button ng-click="articleCreate()">Create article</button>
 </div>
 <form class="search-form">
-    <input ng-model="articleSearchTerm" placeholder="Search by title and text" ng-readonly="search_in_progress" ng-change="articleSearch()">
+    <input ng-model="articleSearchTerm" placeholder="Search by title and text">
 </form>
 <div class="sort-block">
     <label class="sort-label">Sort by: </label>
-    <span ng-class="{'now-active': sortNewOnTop === activeSort}" ng-click="sortArticle(sortNewOnTop)">{{sortNewOnTop}}</span> <span ng-class="{'now-active':sortOldOnTop === activeSort}" ng-click="sortArticle(sortOldOnTop)">{{sortOldOnTop}}</span>
+    <span ng-class="{'now-active': sortNewOnTop === activeSort}" ng-click="activeSort = sortNewOnTop; sortReverse = !sortReverse">{{sortNewOnTop}}</span> <span ng-class="{'now-active':sortOldOnTop === activeSort}" ng-click="activeSort = sortOldOnTop; sortReverse = !sortReverse">{{sortOldOnTop}}</span>
 </div>
-<ul id="search-articles">
-    <li ng-repeat="article in searchArticleArray" ng-if="articleSearchTerm!=''">
+<ul id="all-blogs-articles">
+    <li ng-repeat="article in BlogService.blogsArray | orderBy: activeSort: sortReverse | filter: searchFilter" ng-class="{'to-remove' : HelperService.postIdToRemove===article.id}">
         <h3><a ng-href="#!blog/{{article.id}}">Title: {{article.title}}</a></h3>
         <div>Text: {{article.text}}</div>
         <div>Created at: {{article.created | amDateFormat:'MM-DD-YYYY HH:mm:ss'}}</div>
-        <button ng-if="User.isAuthorizated()" ng-click="removeArticle(article.id)" ng-disabled="article_in_progress">remove article</button>
-    </li>
-</ul>
-<ul id="all-blogs-articles" ng-if="articleSearchTerm==''">
-    <li ng-repeat="article in BlogService.blogsArray" ng-class="{'to-remove' : HelperService.postIdToRemove===article.id}">
-        <h3><a ng-href="#!blog/{{article.id}}">Title: {{article.title}}</a></h3>
-        <div>Text: {{article.text}}</div>
-        <div>Created at: {{article.created | amDateFormat:'MM-DD-YYYY HH:mm:ss'}}</div>
-        <remove-post ng-if="User.isAuthorizated()" path="main" post-id="{{article.id}}" ng-disabled="article_in_progress"></remove-post>
+        <remove-post ng-if="User.isAuthorizated()" path="main" post-id="{{article.id}}"></remove-post>
     </li>
 </ul>
 

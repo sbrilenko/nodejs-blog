@@ -3,12 +3,12 @@ testApp.controller('AuthController', function($scope, $routeParams, $location, U
 
     $scope.login = {};
     $scope.registration = {};
-    $scope.login_in_progress = false;
+    $scope.loginInProgress = false;
     $scope.loginFlag = false;
     $scope.registrationFlag = false;
 
     $scope.signIn = function(form) {
-        $scope.login_in_progress = true;
+        $scope.loginInProgress = true;
         if (form.$valid){
             if($scope.login.email && $scope.login.password){
                 User.auth($scope.login.email, $scope.login.password, function(response, user_instance) {
@@ -17,20 +17,20 @@ testApp.controller('AuthController', function($scope, $routeParams, $location, U
                     user_instance.saveEmail($scope.login.email);
                     $location.path('/');
                 }, function(response) {
-                    $scope.login_in_progress = false;
+                    $scope.loginInProgress = false;
                     $scope.loginFlag = true;
-                    $scope.loginErrors = response.data.message;
+                    $scope.loginErrors = response;
                 });
             }else{
-                $scope.login_in_progress = false;
+                $scope.loginInProgress = false;
             }
         } else {
-            $scope.login_in_progress = false;
+            $scope.loginInProgress = false;
         }
     };
 
     $scope.signUp = function(form) {
-        $scope.login_in_progress = true;
+        $scope.loginInProgress = true;
         if (form.$valid) {
             if($scope.registration.email && $scope.registration.password) {
                 if($scope.registration.password===$scope.registration.confirmPassword) {
@@ -41,26 +41,26 @@ testApp.controller('AuthController', function($scope, $routeParams, $location, U
                             user_instance.saveEmail($scope.registration.email);
                             $location.path('/');
                         }, function(response) {
-                            $scope.login_in_progress = false;
+                            $scope.loginInProgress = false;
                             $scope.registrationFlag = true;
-                            $scope.registrationErrors = response.data.message;
+                            $scope.registrationErrors = response;
                         });
                     }, function(response) {
-                        $scope.login_in_progress = false;
+                        $scope.loginInProgress = false;
                         $scope.registrationFlag = true;
-                        $scope.registrationErrors = response.data.message;
+                        $scope.registrationErrors = response;
                     });
                 }else{
-                    $scope.login_in_progress = false;
+                    $scope.loginInProgress = false;
                     $scope.registrationFlag = true;
                     /*match directive must work, but here check too*/
                     $scope.registrationErrors = "Password and confirm password don't match";
                 }
             }else{
-                $scope.login_in_progress = false;
+                $scope.loginInProgress = false;
             }
         } else {
-            $scope.login_in_progress = false;
+            $scope.loginInProgress = false;
         }
     };
 

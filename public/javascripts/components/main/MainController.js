@@ -3,12 +3,11 @@ testApp.controller('MainController', function($scope, BlogService, User, HelperS
     $scope.HelperService = HelperService;
     $scope.User = User;
     $scope.showArticleDialog = false;
-    $scope.search_in_progress = false;
     $scope.articleSearchTerm = '';
-    $scope.searchArticleArray = [];
-    $scope.sortNewOnTop = 'new to top';
-    $scope.sortOldOnTop = 'old to top';// by default from server
+    $scope.sortNewOnTop = 'newOnTop';
+    $scope.sortOldOnTop = 'oldOnTop';// by default from server
     $scope.activeSort = $scope.sortOldOnTop;
+    $scope.sortReverse = false;
 
     BlogService.get(function(blogs) {
         BlogService.blogsArray = blogs?blogs:[];
@@ -16,29 +15,10 @@ testApp.controller('MainController', function($scope, BlogService, User, HelperS
         console.log(err)
     });
 
-    /*SORT DON"T SAVE AFTER WE GO TO ANOTHER PAGE*/
-    $scope.sortArticle = function(param) {
-        $scope.activeSort = param;
-        if(param === $scope.sortNewOnTop) {
-          BlogService.blogsArray.sort(function(a, b) {
-              return b.created - a.created
-          });
-      } else {
-          BlogService.blogsArray.sort(function(a, b) {
-              return a.created - b.created
-          });
-      }
-        /* don't forget about search */
-        $scope.articleSearch();
-    };
-
-    $scope.articleSearch = function(){
-        if($scope.articleSearchTerm.trim()!=''){
-            $scope.searchArticleArray = BlogService.blogsArray.filter(function(article){
-                return article.title.indexOf($scope.articleSearchTerm)>=0 || article.text.indexOf($scope.articleSearchTerm)>=0
-            })
-        } else $scope.searchArticleArray = [];
-    };
+    /*sort only title and text fields*/
+    $scope.searchFilter = function(term){
+        return term.title.indexOf($scope.articleSearchTerm)>=0 || term.text.indexOf($scope.articleSearchTerm)>=0;
+    }
 
     $scope.articleCreate = function(){
         $scope.showArticleDialog = true;
@@ -52,7 +32,6 @@ testApp.controller('MainController', function($scope, BlogService, User, HelperS
         templateUrl: 'build/components/main/article-dialog.html',
         controller: function( $scope, BlogService) {
             $scope.article = {};
-            $scope.article_in_progress = false;
             $scope.articleErrorsFlag = false;
             $scope.articleErrors = "";
 
@@ -69,22 +48,18 @@ testApp.controller('MainController', function($scope, BlogService, User, HelperS
                         BlogService.get(function(blogs){
                             BlogService.blogsArray = blogs;
                             $scope.closeDialog();
-                            $scope.article_in_progress = false;
                             $scope.articleErrorsFlag = false;
                             $scope.articleErrors = "";
                         },function(err){
-                            $scope.article_in_progress = false;
                             $scope.articleErrorsFlag = true;
                             $scope.articleErrors = err;
                             console.log(err)
                         });
                     },function(response){
-                        $scope.article_in_progress = false;
                         $scope.articleErrorsFlag = true;
-                        $scope.articleErrors = response.data.message;
+                        $scope.articleErrors = response;
                     })
                 }else{
-                    $scope.article_in_progress = false;
                     $scope.articleErrorsFlag = true;
                     $scope.articleErrors = "Form not valid";
                 }
